@@ -6,6 +6,13 @@ var prices = document.querySelector("#price");
 var prices2 = document.querySelector("#price-2");
 var prices3 = document.querySelector("#price-3");
 
+var income = document.querySelector("#income")
+var transportCost = document.querySelector("#transportCost")
+var foodCost = document.querySelector("#foodCost")
+var housingCost = document.querySelector("#housingCost")
+var debt = document.querySelector("#debt")
+var submit = document.querySelector("#submit")
+
 var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
   clock.textContent = date;
