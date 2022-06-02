@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Compiled and minified materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <!-- added asset folder to corect path -->
-    <link rel="stylesheet" href = "style.css"> 
+    <link rel="stylesheet" href="style.css" />
     <title>Group 7: Budget Calculator</title>
   </head>
 
@@ -39,41 +42,68 @@
       <div class="row">
         <form class="col s12">
           <div class="input-field col s12">
-            <input placeholder="monthly income from all sources" id="income" type="text" class="validate">
+            <input
+              placeholder="monthly income from all sources"
+              id="income"
+              type="text"
+              class="validate"
+            />
             <label for="income">Monthly Income</label>
           </div>
           <div class="input-field col s12">
-            <input placeholder="total cost ie gas, car maintenece, bus pass etc" id="transportCost" type="text" class="validate">
+            <input
+              placeholder="total cost ie gas, car maintenece, bus pass etc"
+              id="transportCost"
+              type="text"
+              class="validate"
+            />
             <label for="transport">Monthly Transportation Cost</label>
           </div>
           <div class="input-field col s12">
-            <input placeholder="total cost groceries, dining out, girl scout cookies etc" id="foodCost" type="text" class="validate">
+            <input
+              placeholder="total cost groceries, dining out, girl scout cookies etc"
+              id="foodCost"
+              type="text"
+              class="validate"
+            />
             <label for="food">Monthly Food Cost</label>
           </div>
           <div class="input-field col s12">
-            <input placeholder="rent/mortgage, utilities, cable/internet, maintenece/fees" id="housingCost" type="text" class="validate">
+            <input
+              placeholder="rent/mortgage, utilities, cable/internet, maintenece/fees"
+              id="housingCost"
+              type="text"
+              class="validate"
+            />
             <label for="housing">Monthly Housing Cost</label>
           </div>
           <div class="input-field col s12">
-            <input placeholder="credit card, student loans, personal loans" id="debt" type="text" class="validate">
+            <input
+              placeholder="credit card, student loans, personal loans"
+              id="debt"
+              type="text"
+              class="validate"
+            />
             <label for="debt">Outstanding Debts</label>
           </div>
-          <input type="submit" id="submit">
+          <input type="submit" id="submit" />
         </form>
       </div>
     </section>
     <div id="pictures">
-      <p id="price">test</p>
+      <p id="price"></p>
       <img id="photo" alt="house" />
+      <p id="desc"></p>
       <p id="price-2"></p>
       <img id="photo-2" alt="house-2" />
+      <p id="desc-2"></p>
       <p id="price-3"></p>
       <img id="photo-3" alt="house-3" />
+      <p id="desc-3"></p>
     </div>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
   </body>
-
 </html>
