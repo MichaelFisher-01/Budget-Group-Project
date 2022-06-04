@@ -8,11 +8,11 @@ var prices3 = document.querySelector("#price-3");
 var desc = document.querySelector("#desc");
 var desc2 = document.querySelector("#desc-2");
 var desc3 = document.querySelector("#desc-3");
-var income = document.querySelector("#income");
-var transportCost = document.querySelector("#transportCost");
-var foodCost = document.querySelector("#foodCost");
-var housingCost = document.querySelector("#housingCost");
-var debt = document.querySelector("#debt");
+var incomeInput = document.querySelector("#income");
+var transportCostInput = document.querySelector("#transportCost");
+var foodCostInput = document.querySelector("#foodCost");
+var housingCostInput = document.querySelector("#housingCost");
+var debtInput = document.querySelector("#debt");
 var submitTest = document.getElementById("submit1")
 var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
@@ -20,24 +20,46 @@ var time = function () {
 };
 setInterval(time, 1000);
 
-submitTest.addEventListener('click', function(event) {
-  event.preventDefault()
-  localStorage.setItem(
-    "income", income.value
-  )
-  localStorage.setItem(
-    "transportCost", transportCost.value
-  )
-  localStorage.setItem(
-    "foodCost", foodCost.value
-  )
-  localStorage.setItem(
-    "housingCost", housingCost.value
-  )
-  localStorage.setItem(
-    "debt", debt.value
-  )
-})
+// submitTest.addEventListener('click', function(event) {
+//   event.preventDefault()
+//   localStorage.setItem(
+//     "income", income.value
+//   )
+//   localStorage.setItem(
+//     "transportCost", transportCost.value
+//   )
+//   localStorage.setItem(
+//     "foodCost", foodCost.value
+//   )
+//   localStorage.setItem(
+//     "housingCost", housingCost.value
+//   )
+//   localStorage.setItem(
+//     "debt", debt.value
+//   )
+// })
+
+submitTest.addEventListener('click', function (event) {
+  event.preventDefault();
+  var income = Number(incomeInput.value);
+  var transportCost = Number(transportCostInput.value);
+  var foodCost = Number(foodCostInput.value)
+  var housingCost = Number(housingCostInput.value)
+  var debt = Number(debtInput.value)
+  var myArray = { income, transportCost, foodCost, housingCost, debt };
+  localStorage.setItem('myObj', JSON.stringify(myArray));
+  // var budget = income + housingCost
+  var cost = transportCost+foodCost+debt
+  
+  var calc = income-cost
+  localStorage.setItem ("calc", calc)
+ 
+
+  var mortgage = localStorage.getItem(calc)
+});
+
+
+
 
 const options = {
   method: "GET",
