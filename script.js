@@ -52,25 +52,23 @@ function grabApi() {
         //taking the Json data and displaying the median
         (prices.textContent = response.data.home_search.results[0].list_price),
         (prices2.textContent = response.data.home_search.results[1].list_price),
-        (prices3.textContent = response.data.home_search.results[2].list_price)(
-          // description of the house
-          (desc.textContent =
-            "Beds " +
-            response.data.home_search.results[0].description.beds +
-            " Bath " +
-            response.data.home_search.results[0].description.baths)
-        )(
-          (desc2.textContent =
-            "Beds " +
-            response.data.home_search.results[1].description.beds +
-            " Bath " +
-            response.data.home_search.results[0].description.baths)
-        ),
+        (prices3.textContent = response.data.home_search.results[2].list_price),
+        // description of the house
+        (desc.textContent =
+          "Beds " +
+          response.data.home_search.results[0].description.beds +
+          " Bath " +
+          response.data.home_search.results[0].description.baths),
+        (desc2.textContent =
+          "Beds " +
+          response.data.home_search.results[1].description.beds +
+          " Bath " +
+          response.data.home_search.results[1].description.baths),
         (desc3.textContent =
           "Beds " +
           response.data.home_search.results[2].description.beds +
           " Bath " +
-          response.data.home_search.results[0].description.baths)
+          response.data.home_search.results[2].description.baths)
       )
     )
 
