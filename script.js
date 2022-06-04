@@ -13,7 +13,7 @@ var transportCost = document.querySelector("#transportCost");
 var foodCost = document.querySelector("#foodCost");
 var housingCost = document.querySelector("#housingCost");
 var debt = document.querySelector("#debt");
-var submit = document.querySelector("#submit");
+var submit = document.querySelector("#submit1");
 
 var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
@@ -21,11 +21,15 @@ var time = function () {
 };
 setInterval(time, 1000);
 
+submit.addEventListener("click", function (event) {
+  event.preventDefault;
+  localStorage.setItem("income", income.value);
+});
 const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "us-real-estate.p.rapidapi.com",
-    "X-RapidAPI-Key": "",
+    "X-RapidAPI-Key": "c5b7953215mshccf595d59612252p1e61c9jsnde0627c08536",
   },
 };
 
@@ -55,12 +59,13 @@ function grabApi() {
             response.data.home_search.results[0].description.beds +
             " Bath " +
             response.data.home_search.results[0].description.baths)
+        )(
+          (desc2.textContent =
+            "Beds " +
+            response.data.home_search.results[1].description.beds +
+            " Bath " +
+            response.data.home_search.results[0].description.baths)
         ),
-        (desc2.textContent =
-          "Beds " +
-          response.data.home_search.results[1].description.beds +
-          " Bath " +
-          response.data.home_search.results[0].description.baths),
         (desc3.textContent =
           "Beds " +
           response.data.home_search.results[2].description.beds +
