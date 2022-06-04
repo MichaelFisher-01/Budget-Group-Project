@@ -13,23 +13,30 @@ var transportCost = document.querySelector("#transportCost");
 var foodCost = document.querySelector("#foodCost");
 var housingCost = document.querySelector("#housingCost");
 var debt = document.querySelector("#debt");
-var submit = document.querySelector("#submit1");
-
+var submitTest = document.getElementById("submit1");
 var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
   clock.textContent = date;
 };
 setInterval(time, 1000);
+prompt("Please Enter Api Key");
+var estateApi = prompt.value;
 
-submit.addEventListener("click", function (event) {
-  event.preventDefault;
+submitTest.addEventListener("click", function (event) {
+  event.preventDefault();
+  grabApi();
   localStorage.setItem("income", income.value);
+  localStorage.setItem("transportCost", transportCost.value);
+  localStorage.setItem("foodCost", foodCost.value);
+  localStorage.setItem("housingCost", housingCost.value);
+  localStorage.setItem("debt", debt.value);
 });
+
 const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "us-real-estate.p.rapidapi.com",
-    "X-RapidAPI-Key": "c5b7953215mshccf595d59612252p1e61c9jsnde0627c08536",
+    "X-RapidAPI-Key": estateApi,
   },
 };
 
@@ -68,14 +75,12 @@ function grabApi() {
           "Beds " +
           response.data.home_search.results[2].description.beds +
           " Bath " +
-          response.data.home_search.results[2].description.baths)
+          response.data.home_search.results[0].description.baths)
       )
     )
 
     .catch((err) => console.error(err));
 }
-
-grabApi();
 
 // Calculator
 var submitEl = document.getElementById("submit");
@@ -108,7 +113,7 @@ function getPayments() {
     method: "GET",
     headers: {
       "X-RapidAPI-Host": "mortgage-monthly-payment-calculator.p.rapidapi.com",
-      "X-RapidAPI-Key": "f67cb71206mshc366dc7a6bc7cc6p1e7a9djsn309d42298c5c",
+      "X-RapidAPI-Key": "",
     },
   };
 
