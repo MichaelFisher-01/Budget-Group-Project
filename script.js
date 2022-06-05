@@ -1,4 +1,4 @@
-/* var clock = document.querySelector("#timer");
+var clock = document.querySelector("#timer");
 var pictures = document.querySelector("#photo");
 var pictures2 = document.querySelector("#photo-2");
 var pictures3 = document.querySelector("#photo-3");
@@ -46,12 +46,12 @@ function grabApi() {
     .catch((err) => console.error(err));
 }
 
-grabApi(); */
+grabApi(); 
 
 
 // Calculator
 var submitEl = document.getElementById("submitMortgageForm")
-var loanBox = document.getElementById("loanAmount")
+var monthlyPayments = document.getElementById("monthlyPayments")
 var termsBox = document.getElementById("time");
 var loan;
 var interest30year = 6.146;
@@ -60,10 +60,11 @@ var terms;
 
 function grabValues (event) {
     event.preventDefault();
-        loan = loanBox.value;
-        //interest = interestBox.value;
-        //interest = interest/100;
+    //obtains the value of the monthly payments
+        loan = monthlyPayments.value;
+    //obtains the length of the loan from a drop down selection.
         terms = termsBox.value;
+        //translate the length into the interest rate and gets the number of months.
         if (terms === "30-Year"){
             terms = 360;
             interest = interest30year;
@@ -79,6 +80,7 @@ getLoan()
 }
 
 function getLoan () {
+  //Required info for the mortgage calculations
   const apiKey = {
     method: 'POST',
     headers: {
@@ -88,20 +90,29 @@ function getLoan () {
     },
     body: `{"interest":${interest},"duration":${terms},"emi":${loan},"firstMonth":"2021-Jan","paginationPageNumber":"1","paginationPageSize":"12","ignoreSchedule":false}`
   };
-  
+  //send off the required info and retrieving the mortgage information
   fetch('https://yawin-calculator.p.rapidapi.com/loanamountcalculator', apiKey)
       .then(function(response) {
-          return response.json();
+        //converting into a JSON so we can pull info
+          return response.json(); 
       })
       .then(function (data){
-          console.log(data);
-          var output = document.getElementById("mortgagePayments")
+          //Grabbing a location to output the loan amount.
+          var output = document.getElementById("total")
           var totalLoan = data.amount;
           console.log(totalLoan);
+          //pasting the loan amount to the webpage.
           output.innerText= "Loan Amount: " + totalLoan
           
       }) 
   
   }
 
+  //Event Listeners
+  //Used to submit Mortgage Form
   submitEl.addEventListener("click", grabValues);
+  //Used to Enable drop down menus
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
+  });
