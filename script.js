@@ -5,18 +5,66 @@ var pictures3 = document.querySelector("#photo-3");
 var prices = document.querySelector("#price");
 var prices2 = document.querySelector("#price-2");
 var prices3 = document.querySelector("#price-3");
-
+var desc = document.querySelector("#desc");
+var desc2 = document.querySelector("#desc-2");
+var desc3 = document.querySelector("#desc-3");
+var incomeInput = document.querySelector("#income");
+var transportCostInput = document.querySelector("#transportCost");
+var foodCostInput = document.querySelector("#foodCost");
+var housingCostInput = document.querySelector("#housingCost");
+var debtInput = document.querySelector("#debt");
+var submitTest = document.getElementById("submit1");
 var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
   clock.textContent = date;
 };
 setInterval(time, 1000);
+var estateApi = prompt("Please Enter Estate Api Key");
+
+// submitTest.addEventListener('click', function(event) {
+//   event.preventDefault()
+//   localStorage.setItem(
+//     "income", income.value
+//   )
+//   localStorage.setItem(
+//     "transportCost", transportCost.value
+//   )
+//   localStorage.setItem(
+//     "foodCost", foodCost.value
+//   )
+//   localStorage.setItem(
+//     "housingCost", housingCost.value
+//   )
+//   localStorage.setItem(
+//     "debt", debt.value
+//   )
+// })
+
+submitTest.addEventListener("click", function (event) {
+  event.preventDefault();
+  var income = Number(incomeInput.value);
+  var transportCost = Number(transportCostInput.value);
+  var foodCost = Number(foodCostInput.value);
+  var housingCost = Number(housingCostInput.value);
+  var debt = Number(debtInput.value);
+  var myArray = { income, transportCost, foodCost, housingCost, debt };
+  localStorage.setItem("myObj", JSON.stringify(myArray));
+  // var budget = income + housingCost
+  var cost = transportCost + foodCost + debt;
+
+  var calc = income - cost;
+  localStorage.setItem("calc", calc);
+
+  var mortgage = localStorage.getItem(calc);
+  grabApi();
+});
 
 const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "us-real-estate.p.rapidapi.com",
     "X-RapidAPI-Key": "c5b7953215mshccf595d59612252p1e61c9jsnde0627c08536",
+    "X-RapidAPI-Key": estateApi,
   },
 };
 
@@ -39,17 +87,33 @@ function grabApi() {
         //taking the Json data and displaying the median
         (prices.textContent = response.data.home_search.results[0].list_price),
         (prices2.textContent = response.data.home_search.results[1].list_price),
-        (prices3.textContent = response.data.home_search.results[2].list_price)
+        (prices3.textContent = response.data.home_search.results[2].list_price),
+        // description of the house
+        (desc.textContent =
+          "Beds " +
+          response.data.home_search.results[0].description.beds +
+          " Bath " +
+          response.data.home_search.results[0].description.baths),
+        (desc2.textContent =
+          "Beds " +
+          response.data.home_search.results[1].description.beds +
+          " Bath " +
+          response.data.home_search.results[1].description.baths),
+        (desc3.textContent =
+          "Beds " +
+          response.data.home_search.results[2].description.beds +
+          " Bath " +
+          response.data.home_search.results[0].description.baths)
       )
     )
 
     .catch((err) => console.error(err));
 }
 
+
 grabApi(); 
 
-
-// Calculator
+//Calculator
 var submitEl = document.getElementById("submitMortgageForm")
 var monthlyPayments = document.getElementById("monthlyPayments")
 var termsBox = document.getElementById("time");
@@ -116,3 +180,4 @@ function getLoan () {
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
   });
+
