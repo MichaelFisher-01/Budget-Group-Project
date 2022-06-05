@@ -1,4 +1,4 @@
-var clock = document.querySelector("#timer");
+/* var clock = document.querySelector("#timer");
 var pictures = document.querySelector("#photo");
 var pictures2 = document.querySelector("#photo-2");
 var pictures3 = document.querySelector("#photo-3");
@@ -28,7 +28,7 @@ function grabApi() {
     .then((response) => response.json())
     .then(
       (response) => (
-        // console.log(response.data)
+        console.log(response.data)
         //taking the Json data and displaying the picture of the house
         (pictures.src =
           response.data.home_search.results[0].primary_photo.href),
@@ -46,13 +46,12 @@ function grabApi() {
     .catch((err) => console.error(err));
 }
 
-grabApi();
+grabApi(); */
 
 
 // Calculator
-var submitEl = document.getElementById("submit")
+var submitEl = document.getElementById("submitMortgageForm")
 var loanBox = document.getElementById("loanAmount")
-var interestBox = document.getElementById("interestRate");
 var termsBox = document.getElementById("time");
 var loan;
 var interest30year = 6.146;
@@ -67,38 +66,42 @@ function grabValues (event) {
         terms = termsBox.value;
         if (terms === "30-Year"){
             terms = 360;
-            interest = interest30year/100;
+            interest = interest30year;
         }
         else if (terms === "15-Year"){
             terms = 180;
-            interest=interest15year/100;
+            interest=interest15year;
         }
         else 
         console.log("Something Broke");
 
-getPayments()
+getLoan()
 }
-function getPayments (){
-    
-const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Host': 'mortgage-monthly-payment-calculator.p.rapidapi.com',
-            'X-RapidAPI-Key': 'f67cb71206mshc366dc7a6bc7cc6p1e7a9djsn309d42298c5c'
-        }
-    };
 
-    fetch(`https://mortgage-monthly-payment-calculator.p.rapidapi.com/revotek-finance/mortgage/monthly-payment?loanAmount=${loan}&interestRate=${interest}&terms=${terms}`, options)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function (data){
-            console.log(data);
-            var output = document.getElementById("mortgagePayments")
-            var monthlyPayment = data.monthlyPayment;
-            monthlyPayment = monthlyPayment.toFixed(2);
-            console.log(monthlyPayment);
-            output.innermonthlyPayment= "Monthly Payments: " + monthlyPayment;
-        }) 
+function getLoan () {
+  const apiKey = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'X-RapidAPI-Host': 'yawin-calculator.p.rapidapi.com',
+      'X-RapidAPI-Key': 'f67cb71206mshc366dc7a6bc7cc6p1e7a9djsn309d42298c5c'
+    },
+    body: `{"interest":${interest},"duration":${terms},"emi":${loan},"firstMonth":"2021-Jan","paginationPageNumber":"1","paginationPageSize":"12","ignoreSchedule":false}`
+  };
+  
+  fetch('https://yawin-calculator.p.rapidapi.com/loanamountcalculator', apiKey)
+      .then(function(response) {
+          return response.json();
+      })
+      .then(function (data){
+          console.log(data);
+          var output = document.getElementById("mortgagePayments")
+          var totalLoan = data.amount;
+          console.log(totalLoan);
+          output.innerText= "Loan Amount: " + totalLoan
+          
+      }) 
+  
+  }
 
-} 
+  submitEl.addEventListener("click", grabValues);
