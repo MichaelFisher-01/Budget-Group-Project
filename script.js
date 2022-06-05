@@ -13,12 +13,13 @@ var transportCostInput = document.querySelector("#transportCost");
 var foodCostInput = document.querySelector("#foodCost");
 var housingCostInput = document.querySelector("#housingCost");
 var debtInput = document.querySelector("#debt");
-var submitTest = document.getElementById("submit1")
+var submitTest = document.getElementById("submit1");
 var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
   clock.textContent = date;
 };
 setInterval(time, 1000);
+var estateApi = prompt("Please Enter Estate Api Key");
 
 // submitTest.addEventListener('click', function(event) {
 //   event.preventDefault()
@@ -39,33 +40,30 @@ setInterval(time, 1000);
 //   )
 // })
 
-submitTest.addEventListener('click', function (event) {
+submitTest.addEventListener("click", function (event) {
   event.preventDefault();
   var income = Number(incomeInput.value);
   var transportCost = Number(transportCostInput.value);
-  var foodCost = Number(foodCostInput.value)
-  var housingCost = Number(housingCostInput.value)
-  var debt = Number(debtInput.value)
+  var foodCost = Number(foodCostInput.value);
+  var housingCost = Number(housingCostInput.value);
+  var debt = Number(debtInput.value);
   var myArray = { income, transportCost, foodCost, housingCost, debt };
-  localStorage.setItem('myObj', JSON.stringify(myArray));
+  localStorage.setItem("myObj", JSON.stringify(myArray));
   // var budget = income + housingCost
-  var cost = transportCost+foodCost+debt
-  
-  var calc = income-cost
-  localStorage.setItem ("calc", calc)
- 
+  var cost = transportCost + foodCost + debt;
 
-  var mortgage = localStorage.getItem(calc)
+  var calc = income - cost;
+  localStorage.setItem("calc", calc);
+
+  var mortgage = localStorage.getItem(calc);
+  grabApi();
 });
-
-
-
 
 const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "us-real-estate.p.rapidapi.com",
-    "X-RapidAPI-Key": "",
+    "X-RapidAPI-Key": estateApi,
   },
 };
 
@@ -89,30 +87,27 @@ function grabApi() {
         (prices.textContent = response.data.home_search.results[0].list_price),
         (prices2.textContent = response.data.home_search.results[1].list_price),
         (prices3.textContent = response.data.home_search.results[2].list_price),
-          // description of the house
-          (desc.textContent =
-            "Beds " +
-            response.data.home_search.results[0].description.beds +
-            " Bath " +
-            response.data.home_search.results[0].description.baths)
-        ,
+        // description of the house
+        (desc.textContent =
+          "Beds " +
+          response.data.home_search.results[0].description.beds +
+          " Bath " +
+          response.data.home_search.results[0].description.baths),
         (desc2.textContent =
           "Beds " +
           response.data.home_search.results[1].description.beds +
           " Bath " +
-          response.data.home_search.results[0].description.baths),
+          response.data.home_search.results[1].description.baths),
         (desc3.textContent =
           "Beds " +
           response.data.home_search.results[2].description.beds +
           " Bath " +
           response.data.home_search.results[0].description.baths)
-      ))
-    
+      )
+    )
 
     .catch((err) => console.error(err));
 }
-
-grabApi();
 
 // Calculator
 var submitEl = document.getElementById("submit");
