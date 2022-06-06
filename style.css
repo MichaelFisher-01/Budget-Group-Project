@@ -3,10 +3,19 @@
   font-size: 20px;
   font-family: "Gloria Hallelujah", cursive;
 }
-
+body {
+  background-color: #ECEFF1;
+}
+.disclaimer {
+  font-style: italic;
+}
 h1 {
   font-family: "Permanent Marker", cursive;
   text-align: center;
+}
+
+h2 {
+  font-family:'Contrail One', cursive;
 }
 
 h3 {
