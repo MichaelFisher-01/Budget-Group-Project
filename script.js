@@ -37,28 +37,7 @@
     var interest15year = 4.817;
     var terms;
 
-//var clock = document.querySelector("#timer");
-/*var pictures = document.querySelector("#photo");
-var pictures2 = document.querySelector("#photo-2");
-var pictures3 = document.querySelector("#photo-3");
-var prices = document.querySelector("#price");
-var prices2 = document.querySelector("#price-2");
-var prices3 = document.querySelector("#price-3");
-var desc = document.querySelector("#desc");
-var desc2 = document.querySelector("#desc-2");
-var desc3 = document.querySelector("#desc-3"); */
-/* var incomeInput = document.querySelector("#income");
-var transportCostInput = document.querySelector("#transportCost");
-var foodCostInput = document.querySelector("#foodCost");
-var housingCostInput = document.querySelector("#housingCost");
-var debtInput = document.querySelector("#debt"); */
-//var submitBudget = document.getElementById("submit1");
-/*var time = function () {
-  var date = moment().format("MMMM Do YYYY, h:mm:ss a");
-  clock.textContent = date;
-};
-setInterval(time, 1000);*/
-//var estateApi = prompt("Please Enter Estate Api Key");
+
 
 
 function budgetCalc(event) {
