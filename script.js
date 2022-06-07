@@ -95,7 +95,7 @@ const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "us-real-estate.p.rapidapi.com",
-    //"X-RapidAPI-Key": "c5b7953215mshccf595d59612252p1e61c9jsnde0627c08536",
+    "X-RapidAPI-Key": "c5b7953215mshccf595d59612252p1e61c9jsnde0627c08536",
     "X-RapidAPI-Key": estateApi,
   },
 };
@@ -196,7 +196,7 @@ function getLoan () {
           textEl.innerText= "Estimated Loan Amount: " + totalLoan;
           //pasting the loan amount to the webpage.
           output.appendChild(textEl);
-          grabHomeOptions(totalLoan);
+          //grabHomeOptions(totalLoan); Commented out so we dont use to many APIgrabs.
       }) 
   
   }
