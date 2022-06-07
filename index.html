@@ -12,17 +12,17 @@
     <!-- added asset folder to corect path -->
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Zen+Loop&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Zen+Loop&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
 
     <title>Group 7: Budget Calculator</title>
   </head>
@@ -62,93 +62,111 @@
     </section>
     
     <!--Budget Calculator -->
-    <section class="row">
-      
-
-      <div class="col s6" style="float:left">
-        <h2 class="header2">Budget Calculator</h2>
-        <form>
-          <div class="input-field col s12">
-            <input
-              placeholder="monthly income from all sources"
-              id="income"
-              type="text"
-              class="validate"
-            />
-            <label for="income">Monthly Income</label>
-          </div>
-          <div class="input-field col s12">
-            <input
-              placeholder="total cost ie gas, car maintenece, bus pass etc"
-              id="transportCost"
-              type="text"
-              class="validate"
-            />
-            <label for="transport">Monthly Transportation Cost</label>
-          </div>
-          <div class="input-field col s12">
-            <input
-              placeholder="total cost groceries, dining out, girl scout cookies etc"
-              id="foodCost"
-              type="text"
-              class="validate"
-            />
-            <label for="food">Monthly Food Cost</label>
-          </div>
-          <div class="input-field col s12">
-            <input
-              placeholder="rent/mortgage, utilities, cable/internet, maintenece/fees"
-              id="housingCost"
-              type="text"
-              class="validate"
-            />
-            <label for="housing">Monthly Housing Cost</label>
-          </div>
-          <div class="input-field col s12">
-            <input
-              placeholder="credit card, student loans, personal loans"
-              id="debt"
-              type="text"
-              class="validate"
-            />
-            <label for="debt">Outstanding Debts</label>
-          </div>
-          <!-- <input type="submit" id="submit1" /> -->
-          <button id="submit1">Submit</button>
-          <button onclick="window.localStorage.clear();">Clear All</button>
-        </form>
+<section class="row">
+  <div class="col s6" style="float:left">
+    <h2 class="header2">Budget Calculator</h2>
+    <form id="budgetForm">
+      <!-- Monthly Income Box-->
+      <div class="input-field col s12">
+        <input 
+          placeholder="monthly income from all sources" 
+          id="income" 
+          type="number"
+          step="any" 
+          class="validate"
+        />
+        <label for="income">Monthly Income</label>
+        <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
       </div>
-    
+      <!-- Monthly Transport Box-->
+      <div class="input-field col s12">
+        <input 
+          placeholder="total cost ie gas, car maintenece, bus pass etc" 
+          id="transportCost" 
+          type="number"
+          step="any" 
+          class="validate"
+        />
+        <label for="transport">Monthly Transportation Cost</label>
+        <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
+      </div>
+      <!--Monthly Food Box-->
+      <div class="input-field col s12">
+        <input
+          placeholder="total cost groceries, dining out, girl scout cookies etc"
+          id="foodCost"
+          type="number"
+          step="any" 
+          class="validate"
+        />
+        <label for="food">Monthly Food Cost</label>
+        <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
+      </div>
+      <!--Monthly Housing Cost-->
+      <div class="input-field col s12">
+        <input
+          placeholder="rent/mortgage, utilities, cable/internet, maintenece/fees"
+          id="housingCost"
+          type="number"
+          step="any" 
+          class="validate"
+        />
+        <label for="housing">Monthly Housing Cost</label>
+        <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
+      </div>
+      <!-- Outstanding Debts Box-->
+      <div class="input-field col s12">
+        <input
+          placeholder="credit card, student loans, personal loans"
+          id="debt"
+          type="number"
+          step="any" 
+          class="validate"
+        />
+        <label for="debt">Outstanding Debts</label>
+        <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
+      </div>
+        <button id="submitBudget">Submit</button>
+        <button onclick="window.localStorage.clear();">Clear All</button>
+      </form>
+      </div>
 
-    <!-- MORTGAGE CALC-->
-  
-    <div class="col s6">
-      <h2 class="header2">Mortgage Calculator</h2>
-    <form class=>
+      <!-- Column 2 of the user Input-->
+      <div class="col s6">
       <form id = "mortgageForm">
-        <div>Estimated Monthly Payments:<input type="text" id="monthlyPayments"></input></div>
-          <div>Loan Interest Rate: 30 year 6.146%</div>
-            <div>Loan Interest Rate: 15 year 4.817%</div>
-            <div>Loan Time Frame: 
-              <div class="input-field col s12">
-                <select name="time" id="time">
-                  <option value="30-Year">30-Year</option>
-                  <option value="15-Year">15-Year</option>
-                </select>
-              </div>
-            </div>
-      <button id = "submitMortgageForm">Submit</button>
-      <div id="total"></div>
-    </div>
-    </form>
-  </section>
+        <h2 class="header2">Mortgage Calculator</h2>
+        <!--Estimated Monthly Payments Box-->
+        <div class="input-field col s12">
+          <input 
+            placeholder="What would you like to pay monthly for a house?"
+            id="monthlyPayments"
+            type="number"
+            step="any"  
+            class="validate"
+          />
+          <label for="monthlyPayments">Estimated Monthly Payments:</label>
+          <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
+        </div>
+        <!--Loan Timeframe Box-->
+        <div class="input-field col s12">
+          <select name="time" id="time">
+            <option value="30-Year">30-Year -(Interest Rate: 6.146%)</option>
+            <option value="15-Year">15-Year -(Interest Rate: 4.817%)</option>
+          </select>
+          <label for="time">Timeframe for Loan:</label>
+        </div>
+        <button id = "submitMortgageForm">Submit</button>
+        <div id="results"></div>
+      </form>
+      </div>
+</section>
 
     <!-- Housing API info -->
   <!-- <section>
     <div class="row">
      <div id="pictures">
         <p id="price"></p>
-       <img id="photo" alt="house" />
+       <img id="photo" alt="house" /> 
        <p id="desc"></p>
         <p id="price-2"></p>
        <img id="photo-2" alt="house-2" />
@@ -157,53 +175,51 @@
         <img id="photo-3" alt="house-3" />
         <p id="desc-3"></p>
      </div>
-    </div>
-    
-  </section> -->
+    </div> -->
 
-  <section>
-    <div class="row">
-      <div class="col s4">
-        <div class="card">
-          <div class="card-image">
-            <img id="photo" alt="house" />
-            <p id="price"></p>
+    <section>
+      <div class="row">
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img id="photo" alt="house" />
+              <p id="price"></p>
+            </div>
+            <div class="card-content">
+              <p id="desc"></p>
+            </div>
           </div>
-          <div class="card-content">
-            <p id="desc"></p>
+        </div>
+  
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img id="photo" alt="house" />
+              <p id="price-2"></p>
+            </div>
+            <div class="card-content">
+              <p id="desc-2"></p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img id="photo" alt="house" />
+              <p id="price-3"></p>
+            </div>
+            <div class="card-content">
+              <p id="desc-3"></p>
+            </div>
           </div>
         </div>
       </div>
+    </section>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
 
-      <div class="col s4">
-        <div class="card">
-          <div class="card-image">
-            <img id="photo" alt="house" />
-            <p id="price-2"></p>
-          </div>
-          <div class="card-content">
-            <p id="desc-2"></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col s4">
-        <div class="card">
-          <div class="card-image">
-            <img id="photo" alt="house" />
-            <p id="price-3"></p>
-          </div>
-          <div class="card-content">
-            <p id="desc-3"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

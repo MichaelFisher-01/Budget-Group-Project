@@ -1,5 +1,44 @@
-var clock = document.querySelector("#timer");
-var pictures = document.querySelector("#photo");
+//Global Variabls
+  // Clock Variables
+    var clock = document.querySelector("#timer");
+    var time = function () {
+      var date = moment().format("MMMM Do YYYY, h:mm:ss a");
+      clock.textContent = date;
+    };
+    setInterval(time, 1000);
+  //RealEstate Variables
+    var pictures = document.querySelector("#photo");
+    var pictures2 = document.querySelector("#photo-2");
+    var pictures3 = document.querySelector("#photo-3");
+    var prices = document.querySelector("#price");
+    var prices2 = document.querySelector("#price-2");
+    var prices3 = document.querySelector("#price-3");
+    var desc = document.querySelector("#desc");
+    var desc2 = document.querySelector("#desc-2");
+    var desc3 = document.querySelector("#desc-3");
+
+    var estateApi = prompt("Please Enter Estate Api Key");
+
+  //Budget Form Variabls
+    var incomeInput = document.getElementById("income");
+    var transportCostInput = document.getElementById("transportCost");
+    var foodCostInput = document.getElementById("foodCost");
+    var housingCostInput = document.getElementById("housingCost");
+    var debtInput = document.getElementById("debt");
+    var submitBudget = document.getElementById("submitBudget");
+    var output = document.getElementById("results")
+  //Calc Variabls
+    var submitEl = document.getElementById("submitMortgageForm")
+    var monthlyPayments = document.getElementById("monthlyPayments")
+    var termsBox = document.getElementById("time");
+    var loan;
+    var totalLoan;
+    var interest30year = 6.146;
+    var interest15year = 4.817;
+    var terms;
+
+//var clock = document.querySelector("#timer");
+/*var pictures = document.querySelector("#photo");
 var pictures2 = document.querySelector("#photo-2");
 var pictures3 = document.querySelector("#photo-3");
 var prices = document.querySelector("#price");
@@ -7,57 +46,50 @@ var prices2 = document.querySelector("#price-2");
 var prices3 = document.querySelector("#price-3");
 var desc = document.querySelector("#desc");
 var desc2 = document.querySelector("#desc-2");
-var desc3 = document.querySelector("#desc-3");
-var incomeInput = document.querySelector("#income");
+var desc3 = document.querySelector("#desc-3"); */
+/* var incomeInput = document.querySelector("#income");
 var transportCostInput = document.querySelector("#transportCost");
 var foodCostInput = document.querySelector("#foodCost");
 var housingCostInput = document.querySelector("#housingCost");
-var debtInput = document.querySelector("#debt");
-var submitTest = document.getElementById("submit1");
-var time = function () {
+var debtInput = document.querySelector("#debt"); */
+//var submitBudget = document.getElementById("submit1");
+/*var time = function () {
   var date = moment().format("MMMM Do YYYY, h:mm:ss a");
   clock.textContent = date;
 };
-setInterval(time, 1000);
-var estateApi = prompt("Please Enter Estate Api Key");
+setInterval(time, 1000);*/
+//var estateApi = prompt("Please Enter Estate Api Key");
 
-// submitTest.addEventListener('click', function(event) {
-//   event.preventDefault()
-//   localStorage.setItem(
-//     "income", income.value
-//   )
-//   localStorage.setItem(
-//     "transportCost", transportCost.value
-//   )
-//   localStorage.setItem(
-//     "foodCost", foodCost.value
-//   )
-//   localStorage.setItem(
-//     "housingCost", housingCost.value
-//   )
-//   localStorage.setItem(
-//     "debt", debt.value
-//   )
-// })
 
-submitTest.addEventListener("click", function (event) {
+function budgetCalc(event) {
   event.preventDefault();
+  //Grabs income from Monthly Income Box
   var income = Number(incomeInput.value);
+  console.log(income);
+  //Grabs value from Monthly Transport Box
   var transportCost = Number(transportCostInput.value);
+  console.log(transportCost);
+  //Grabs value from the Monthly Food Box
   var foodCost = Number(foodCostInput.value);
+  console.log(foodCost);
+  //Grabs vallue from the Monthyl Housing Cost
   var housingCost = Number(housingCostInput.value);
+  console.log(housingCost);
+  //Grabs value from the Outstanding Debts box
   var debt = Number(debtInput.value);
+  console.log(debt);
+  //Creates an income array to store all the grabbed values.
   var myArray = { income, transportCost, foodCost, housingCost, debt };
+  //Stores income array to localStorage
   localStorage.setItem("myObj", JSON.stringify(myArray));
   // var budget = income + housingCost
   var cost = transportCost + foodCost + debt;
-
-  var calc = income - cost;
-  localStorage.setItem("calc", calc);
-
-  var mortgage = localStorage.getItem(calc);
-  grabApi();
-});
+  var budgetAmount = income - cost;
+  var textEl = document.createElement('p');
+  textEl.innerText = "Budget Amount: " + budgetAmount;
+  output.appendChild(textEl);
+  localStorage.setItem("budgetAmount", budgetAmount);
+};
 
 const options = {
   method: "GET",
@@ -68,9 +100,9 @@ const options = {
   },
 };
 
-function grabApi() {
+function grabHomeOptions(loanAmount) {
   fetch(
-    "https://us-real-estate.p.rapidapi.com/v2/for-sale?offset=0&limit=5&state_code=CO&city=Denver&sort=newest&price_max=500000",
+    `https://us-real-estate.p.rapidapi.com/v2/for-sale?offset=0&limit=5&state_code=CO&city=Denver&sort=newest&price_max=${loanAmount}`,
     options
   )
     .then((response) => response.json())
@@ -106,22 +138,20 @@ function grabApi() {
           response.data.home_search.results[0].description.baths)
       )
     )
-
-    .catch((err) => console.error(err));
 }
 
-
-grabApi(); 
-
 //Calculator
-var submitEl = document.getElementById("submitMortgageForm")
+/*var submitEl = document.getElementById("submitMortgageForm")
 var monthlyPayments = document.getElementById("monthlyPayments")
 var termsBox = document.getElementById("time");
 var loan;
+var totalLoan;
 var interest30year = 6.146;
 var interest15year = 4.817;
-var terms;
+var terms; */
 
+
+//Mortgage Calculator Functions
 function grabValues (event) {
     event.preventDefault();
     //obtains the value of the monthly payments
@@ -142,7 +172,6 @@ function grabValues (event) {
 
 getLoan()
 }
-
 function getLoan () {
   //Required info for the mortgage calculations
   const apiKey = {
@@ -162,22 +191,25 @@ function getLoan () {
       })
       .then(function (data){
           //Grabbing a location to output the loan amount.
-          var output = document.getElementById("total")
+          var textEl = document.createElement('p');
           var totalLoan = data.amount;
-          console.log(totalLoan);
+          textEl.innerText= "Estimated Loan Amount: " + totalLoan;
           //pasting the loan amount to the webpage.
-          output.innerText= "Loan Amount: " + totalLoan
-          
+          output.appendChild(textEl);
+          //grabHomeOptions(totalLoan); Commented out so we dont use to many APIgrabs.
       }) 
   
   }
 
   //Event Listeners
-  //Used to submit Mortgage Form
+  
+  //Submits the Budget Form
+  submitBudget.addEventListener("click", budgetCalc);
+  //Used to submit Mortgage Calculator Form
   submitEl.addEventListener("click", grabValues);
-  //Used to Enable drop down menus
+  //Used to Enable drop down menus on the website
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
-    M.FormSelect.init(elems);
+    M.FormSelect.init(elems, options);
   });
 
