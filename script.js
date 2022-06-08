@@ -28,6 +28,9 @@
     var priceThree;
     var bedThree;
     var bathThree;
+    var houseOne = [];
+    var houseTwo = [];
+    var houseThree = [];
 
     var estateApi = prompt("Please Enter Estate Api Key");
 
@@ -50,7 +53,9 @@
     var terms;
     var btnEl = document.createElement('button');
     btnEl.setAttribute('id', "getHousingBtn")
+    btnEl.setAttribute('type', "button")
     btnEl.innerText = "Search For Homes" ;
+
     
 
 //Function for Budget
@@ -99,9 +104,11 @@ function grabHomeOptions(loanAmount) {
     .then((response) => response.json())
     .then(
       (response) => (
-        //taking the Json data and displaying the picture of the house
-        (pictures.src =
-          response.data.home_search.results[0].primary_photo.href),
+        console.log(response.data)(
+          //taking the Json data and displaying the picture of the house
+          (pictures.src =
+            response.data.home_search.results[0].primary_photo.href)
+        ),
         (pictures2.src =
           response.data.home_search.results[1].primary_photo.href),
         (pictures3.src =
@@ -125,55 +132,54 @@ function grabHomeOptions(loanAmount) {
           "Beds " +
           response.data.home_search.results[2].description.beds +
           " Bath " +
-          response.data.home_search.results[2].description.baths)
-
+          response.data.home_search.results[0].description.baths),
+          
+        imgOne = response.data.home_search.results[0].primary_photo.href,
+        priceOne = response.data.home_search.results[0].list_price,
+        bedOne = response.data.home_search.results[0].description.beds,
+        bathOne = response.data.home_search.results[0].description.baths, 
+          
+        imgTwo = response.data.home_search.results[1].primary_photo.href,
+        priceTwo = response.data.home_search.results[1].list_price,
+        bedTwo = response.data.home_search.results[1].description.beds,
+        bathTwo = response.data.home_search.results[1].description.baths, 
+          
+        imgThree = response.data.home_search.results[2].primary_photo.href,
+        priceThree = response.data.home_search.results[2].list_price,
+        bedThree = response.data.home_search.results[2].description.beds,
+        bathThree = response.data.home_search.results[2].description.baths,
         
+        houseOneData = [
+          {
+            houseImage: imgOne,
+            houseCost: priceOne,
+            housebeds: bedOne,
+            houseBaths: bathOne
+          }
+        ],
+        houseTwoData = [
+          {
+            houseImage: imgTwo,
+            houseCost: priceTwo,
+            housebeds: bedTwo,
+            houseBaths: bathTwo
+          }
+        ],
+        houseThreeData = [
+          {
+            houseImage: imgThree,
+            houseCost: priceThree,
+            housebeds: bedThree,
+            houseBaths: bathThree
+          }
+        ],
+    
+        localStorage.setItem("houseOne",JSON.stringify(houseOneData)),
+        localStorage.setItem("houseTwo",JSON.stringify(houseTwoData)),
+        localStorage.setItem("houseThree",JSON.stringify(houseThreeData))
+      
       )
-
-    )
-    imgOne = response.data.home_search.results[0].primary_photo.href;
-    priceOne = response.data.home_search.results[0].list_price;
-    bedOne = response.data.home_search.results[0].description.beds;
-    bathOne = response.data.home_search.results[0].description.baths; 
-    
-    imgTwo = response.data.home_search.results[1].primary_photo.href;
-    priceTwo = response.data.home_search.results[1].list_price;
-    bedTwo = response.data.home_search.results[1].description.beds;
-    bathTwo = response.data.home_search.results[1].description.baths; 
-    
-    imgThree = response.data.home_search.results[2].primary_photo.href;
-    priceThree = response.data.home_search.results[2].list_price;
-    bedThree = response.data.home_search.results[2].description.beds;
-    bathThree = response.data.home_search.results[2].description.baths; 
-
-    var houseOneData = [
-      {
-        houseImage: imgOne,
-        houseCost: priceOne,
-        housebeds: bedOne,
-        houseBaths: bathOne
-      }
-    ]
-    var houseTwoData = [
-      {
-        houseImage: response.data.home_search.results[1].primary_photo.href,
-        houseCost: response.data.home_search.results[1].list_price,
-        housebeds: response.data.home_search.results[1].description.beds,
-        houseBaths: response.data.home_search.results[1].description.baths
-      }
-    ]
-    var houseThreeData = [
-      {
-        houseImage: response.data.home_search.results[3].primary_photo.href,
-        houseCost: response.data.home_search.results[3].list_price,
-        housebeds: response.data.home_search.results[3].description.beds,
-        houseBaths: response.data.home_search.results[3].description.baths
-      }
-    ]
-
-    localStorage.setItem("houseOne",JSON.stringify(houseOneData));
-    localStorage.setItem("houseTwo",JSON.stringify(houseTwoData));
-    localStorage.setItem("houseThree",JSON.stringify(houseThreeData));
+    );
 }
 
 
