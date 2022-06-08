@@ -16,6 +16,18 @@
     var desc = document.querySelector("#desc");
     var desc2 = document.querySelector("#desc-2");
     var desc3 = document.querySelector("#desc-3");
+    var imgOne;
+    var priceOne;
+    var bedOne;
+    var bathOne;    
+    var imgTwo;
+    var priceTwo;
+    var bedTwo;
+    var bathTwo;
+    var imgThree;
+    var priceThree;
+    var bedThree;
+    var bathThree;
 
     var estateApi = prompt("Please Enter Estate Api Key");
 
@@ -36,25 +48,24 @@
     var interest30year = 6.146;
     var interest15year = 4.817;
     var terms;
+    var btnEl = document.createElement('button');
+    btnEl.setAttribute('id', "getHousingBtn")
+    btnEl.innerText = "Search For Homes" ;
+    
 
-//Functions for Budget
+//Function for Budget
 function budgetCalc(event) {
   event.preventDefault();
   //Grabs income from Monthly Income Box
   var income = Number(incomeInput.value);
-  console.log(income);
   //Grabs value from Monthly Transport Box
   var transportCost = Number(transportCostInput.value);
-  console.log(transportCost);
   //Grabs value from the Monthly Food Box
   var foodCost = Number(foodCostInput.value);
-  console.log(foodCost);
   //Grabs vallue from the Monthyl Housing Cost
   var housingCost = Number(housingCostInput.value);
-  console.log(housingCost);
   //Grabs value from the Outstanding Debts box
   var debt = Number(debtInput.value);
-  console.log(debt);
   //Creates an income array to store all the grabbed values.
   var myArray = { income, transportCost, foodCost, housingCost, debt };
   //Stores income array to localStorage
@@ -69,7 +80,7 @@ function budgetCalc(event) {
 };
 
 
-// Functions for get House Data
+// Function for get House Data
 const options = {
   method: "GET",
   headers: {
@@ -79,6 +90,7 @@ const options = {
   },
 };
 
+
 function grabHomeOptions(loanAmount) {
   fetch(
     `https://us-real-estate.p.rapidapi.com/v2/for-sale?offset=0&limit=5&state_code=CO&city=Denver&sort=newest&price_max=${loanAmount}`,
@@ -87,7 +99,6 @@ function grabHomeOptions(loanAmount) {
     .then((response) => response.json())
     .then(
       (response) => (
-        console.log(response.data)
         //taking the Json data and displaying the picture of the house
         (pictures.src =
           response.data.home_search.results[0].primary_photo.href),
@@ -114,9 +125,55 @@ function grabHomeOptions(loanAmount) {
           "Beds " +
           response.data.home_search.results[2].description.beds +
           " Bath " +
-          response.data.home_search.results[0].description.baths)
+          response.data.home_search.results[2].description.baths)
+
+        
       )
+
     )
+    imgOne = response.data.home_search.results[0].primary_photo.href;
+    priceOne = response.data.home_search.results[0].list_price;
+    bedOne = response.data.home_search.results[0].description.beds;
+    bathOne = response.data.home_search.results[0].description.baths; 
+    
+    imgTwo = response.data.home_search.results[1].primary_photo.href;
+    priceTwo = response.data.home_search.results[1].list_price;
+    bedTwo = response.data.home_search.results[1].description.beds;
+    bathTwo = response.data.home_search.results[1].description.baths; 
+    
+    imgThree = response.data.home_search.results[2].primary_photo.href;
+    priceThree = response.data.home_search.results[2].list_price;
+    bedThree = response.data.home_search.results[2].description.beds;
+    bathThree = response.data.home_search.results[2].description.baths; 
+
+    var houseOneData = [
+      {
+        houseImage: imgOne,
+        houseCost: priceOne,
+        housebeds: bedOne,
+        houseBaths: bathOne
+      }
+    ]
+    var houseTwoData = [
+      {
+        houseImage: response.data.home_search.results[1].primary_photo.href,
+        houseCost: response.data.home_search.results[1].list_price,
+        housebeds: response.data.home_search.results[1].description.beds,
+        houseBaths: response.data.home_search.results[1].description.baths
+      }
+    ]
+    var houseThreeData = [
+      {
+        houseImage: response.data.home_search.results[3].primary_photo.href,
+        houseCost: response.data.home_search.results[3].list_price,
+        housebeds: response.data.home_search.results[3].description.beds,
+        houseBaths: response.data.home_search.results[3].description.baths
+      }
+    ]
+
+    localStorage.setItem("houseOne",JSON.stringify(houseOneData));
+    localStorage.setItem("houseTwo",JSON.stringify(houseTwoData));
+    localStorage.setItem("houseThree",JSON.stringify(houseThreeData));
 }
 
 
@@ -162,20 +219,24 @@ function getLoan () {
           //Grabbing a location to output the loan amount.
           var textEl = document.createElement('p');
           var totalLoan = data.amount;
-          textEl.innerText= "Estimated Loan Amount: " + totalLoan;
+          textEl.innerText = "Estimated Loan Amount: " + totalLoan;
           //pasting the loan amount to the webpage.
           output.appendChild(textEl);
-          //grabHomeOptions(totalLoan); Commented out so we dont use to many APIgrabs.
+          output.appendChild(btnEl);
+
       }) 
   
   }
 
+
   //Event Listeners
-  
+    
   //Submits the Budget Form
   submitBudget.addEventListener("click", budgetCalc);
   //Used to submit Mortgage Calculator Form
   submitEl.addEventListener("click", grabValues);
+  //Pulls housing data based on the Esitmated Loan Amount
+  btnEl.addEventListener("click",grabHomeOptions);
   //Used to Enable drop down menus on the website
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
