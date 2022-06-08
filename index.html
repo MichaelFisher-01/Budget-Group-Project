@@ -61,12 +61,12 @@
       </div>
     </section>
     
-    <!--Budget Calculator -->
+<!--Budget Calculator -->
 <section class="row">
   <div class="col s6" style="float:left">
     <h2 class="header2">Budget Calculator</h2>
     <form id="budgetForm">
-      <!-- Monthly Income Box-->
+<!-- Monthly Income Box-->
       <div class="input-field col s12">
         <input 
           placeholder="monthly income from all sources" 
@@ -78,7 +78,7 @@
         <label for="income">Monthly Income</label>
         <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
       </div>
-      <!-- Monthly Transport Box-->
+<!-- Monthly Transport Box-->
       <div class="input-field col s12">
         <input 
           placeholder="total cost ie gas, car maintenece, bus pass etc" 
@@ -90,7 +90,7 @@
         <label for="transport">Monthly Transportation Cost</label>
         <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
       </div>
-      <!--Monthly Food Box-->
+<!--Monthly Food Box-->
       <div class="input-field col s12">
         <input
           placeholder="total cost groceries, dining out, girl scout cookies etc"
@@ -102,7 +102,7 @@
         <label for="food">Monthly Food Cost</label>
         <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
       </div>
-      <!--Monthly Housing Cost-->
+<!--Monthly Housing Cost-->
       <div class="input-field col s12">
         <input
           placeholder="rent/mortgage, utilities, cable/internet, maintenece/fees"
@@ -114,7 +114,7 @@
         <label for="housing">Monthly Housing Cost</label>
         <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
       </div>
-      <!-- Outstanding Debts Box-->
+<!-- Outstanding Debts Box-->
       <div class="input-field col s12">
         <input
           placeholder="credit card, student loans, personal loans"
@@ -131,11 +131,11 @@
       </form>
       </div>
 
-      <!-- Column 2 of the user Input-->
+<!-- Column 2 of the user Input-->
       <div class="col s6">
       <form id = "mortgageForm">
         <h2 class="header2">Mortgage Calculator</h2>
-        <!--Estimated Monthly Payments Box-->
+<!--Estimated Monthly Payments Box-->
         <div class="input-field col s12">
           <input 
             placeholder="How much of your budget amount can go to a house payment?"
@@ -147,59 +147,87 @@
           <label for="monthlyPayments">Estimated Monthly Payments:</label>
           <span class="helper-text" data-error="Only Numbers Please!" data-success="Good!"></span>
         </div>
-        <!--Loan Timeframe Box-->
+<!--Loan Timeframe Box-->
         <div class="input-field col s12">
-          <select name="time" id="time">
+          <select name ="time" id="time">
             <option value="30-Year">30-Year -(Interest Rate: 6.146%)</option>
             <option value="15-Year">15-Year -(Interest Rate: 4.817%)</option>
           </select>
-          <label for="time">Timeframe for Loan:</label>
+          <label for="time">Timeframe of Loan:</label>
         </div>
+      <div class="input-field col s12">
+        <input 
+          placeholder="What state are you looking in?"
+          id="stateCode"
+          type="text" required minlength="2" maxlength="2"  
+          class="validate"
+        />
+        <label for="stateCode">State Code:</label>
+        <span class="helper-text" data-error="Use 2 Letters Please!" data-success="Good!"></span>
+      </div>
+
+        <div class="input-field col s12">
+          <input 
+            placeholder="What city works best for you?"
+            id="cityName"
+            type="text"  
+            class="validate"
+          />
+          <label for="cityName">City Name:</label>
+          <span class="helper-text" data-error="Only Letters Please!" data-success="Good!"></span>
+        </div> 
+<!-- Submit the form and display area for results-->
         <button id = "submitMortgageForm">Submit</button>
         <div id="results"></div>
       </form>
       </div>
 </section>
-
-    <!-- Housing API info -->
+<!-- Housing API info -->
     <section>
-      <div class="row">
-        <div class="col s4">
-          <div class="card">
-            <div class="card-image">
-              <img id="photo" alt="house" />
-              <p id="price"></p>
+<!-- Housing Info Card 1-->
+        <div class="row">
+            <div class="col s4">
+              <div class="card">
+                <div class="card-image">
+                  <a href="https://www.realtor.com/" id="house1Link">
+                  <img id="photo" alt="house" />
+                  </a>
+                  <p id="price"></p>
+                </div>
+                <div class="card-content">
+                  <p id="desc"></p>
+                </div>
+              </div>
             </div>
-            <div class="card-content">
-              <p id="desc"></p>
+<!-- Housing Info Card 2-->
+          <div class="col s4">
+            <div class="card">
+              <div class="card-image">
+                <a href="https://www.realtor.com/" id="house2Link">
+                <img id="photo-2" alt="house" />
+                </a>
+                <p id="price-2"></p>
+              </div>
+              <div class="card-content">
+                <p id="desc-2"></p>
+              </div>
+            </div>
+          </div>
+<!-- Housing Info Card 3-->
+          <div class="col s4">
+            <div class="card">
+              <div class="card-image">
+                <a href="https://www.realtor.com/" id="house3Link"> 
+                <img id="photo-3" alt="house" />
+                </a>
+                <p id="price-3"></p>
+              </div>
+              <div class="card-content">
+                <p id="desc-3"></p>
+              </div>
             </div>
           </div>
         </div>
-  
-        <div class="col s4">
-          <div class="card">
-            <div class="card-image">
-              <img id="photo-2" alt="house" />
-              <p id="price-2"></p>
-            </div>
-            <div class="card-content">
-              <p id="desc-2"></p>
-            </div>
-          </div>
-        </div>
-  
-        <div class="col s4">
-          <div class="card">
-            <div class="card-image">
-              <img id="photo-3" alt="house" />
-              <p id="price-3"></p>
-            </div>
-            <div class="card-content">
-              <p id="desc-3"></p>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
     
 <!-- Compiled and minified JavaScript -->
