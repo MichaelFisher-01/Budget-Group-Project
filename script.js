@@ -234,8 +234,8 @@ function getLoan () {
           //Grabbing a location to output the loan amount.
           var textEl = document.createElement('p');
           textEl.setAttribute("id", "loanAmount")
-          var totalLoan = data.amount;
-          totalLoan = totalLoan.toLocaleString("en-US");
+          totalLoan = data.amount;
+          //totalLoan = totalLoan.toLocaleString("en-US");
           textEl.innerText = "Estimated Loan Amount: $" + totalLoan;
           
           
